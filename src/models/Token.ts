@@ -18,9 +18,9 @@ const tokenSchema: Schema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now(),
-        expires: "1d",
+        expires: "10m",
     },
 });
 
-const token = mongoose.model<IToken>('token', tokenSchema);
-export default token;
+const Token = mongoose.model<IToken>('token', tokenSchema);
+export default Token;

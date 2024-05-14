@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
 import { hashPassword } from '../utils/auth';
+import Token from '../models/Token';
+import { generateToken } from '../utils/token';
 
 export class AuthController {
 
@@ -16,14 +18,18 @@ export class AuthController {
                 return res.status(409).json({ error: error.message });
             }
 
-
-
             // Crea un usuario
             const user = new User(req.body);
 
             // Hash password
             user.password = await hashPassword(password);
-            await user.save();
+
+            // Generar el token
+            const token = new Token();
+            token.token = generateToken();
+            token.user = user.id;
+
+            await Promise.allSettled([user.save(), token.save()]);
 
             res.send('Cuenta creada. Revisa tu email para confirmarla');
         } catch (error) {
