@@ -16,6 +16,8 @@ export class AuthController {
                 return res.status(409).json({ error: error.message });
             }
 
+
+
             // Crea un usuario
             const user = new User(req.body);
 
