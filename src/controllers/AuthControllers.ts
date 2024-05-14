@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
 import User from '../models/User';
 import { hashPassword } from '../utils/auth';
 import Token from '../models/Token';
 import { generateToken } from '../utils/token';
+import { AuthEmail } from '../emails/AuthEmail';
 
 export class AuthController {
 
@@ -28,6 +28,13 @@ export class AuthController {
             const token = new Token();
             token.token = generateToken();
             token.user = user.id;
+
+            // Enviar el email
+            AuthEmail.sendConfirmationEmail({
+                email: user.email,
+                name: user.email,
+                token: token.token,
+            });
 
             await Promise.allSettled([user.save(), token.save()]);
 
