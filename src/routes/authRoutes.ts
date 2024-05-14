@@ -29,4 +29,20 @@ router.post('/confirm-account',
     AuthController.confirmAccount,
 );
 
+router.post('/confirm-account',
+    body('token')
+        .notEmpty().withMessage('El token no puede estar vacío'),
+    handleInputErrors,
+    AuthController.confirmAccount,
+);
+
+router.post('/login',
+    body('email')
+        .notEmpty().withMessage('E-mail no válido'),
+    body('password')
+        .notEmpty().withMessage('La contraseña no debe estar vacía'),
+    handleInputErrors,
+    AuthController.login,
+);
+
 export default router;
