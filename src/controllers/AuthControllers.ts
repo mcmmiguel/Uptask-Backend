@@ -137,7 +137,7 @@ export class AuthController {
 
             await Promise.allSettled([user.save(), token.save()]);
 
-            res.send('Se envió un nuevo tokena tu e-mail');
+            res.send('Se envió un nuevo token a tu e-mail');
         } catch (error) {
             res.status(500).json({ error: 'Hubo un error' });
         }
