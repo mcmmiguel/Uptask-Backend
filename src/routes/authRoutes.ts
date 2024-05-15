@@ -45,4 +45,11 @@ router.post('/login',
     AuthController.login,
 );
 
+router.post('/request-code',
+    body('email')
+        .notEmpty().withMessage('E-mail no válido'),
+    handleInputErrors,
+    AuthController.requestConfirmationCode,
+);
+
 export default router;
