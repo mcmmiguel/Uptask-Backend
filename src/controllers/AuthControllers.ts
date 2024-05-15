@@ -32,7 +32,7 @@ export class AuthController {
             // Enviar el email
             AuthEmail.sendConfirmationEmail({
                 email: user.email,
-                name: user.email,
+                name: user.name,
                 token: token.token,
             });
 
@@ -131,7 +131,7 @@ export class AuthController {
             // Enviar el email
             AuthEmail.sendConfirmationEmail({
                 email: user.email,
-                name: user.email,
+                name: user.name,
                 token: token.token,
             });
 
