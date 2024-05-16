@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { AuthController } from "../controllers/AuthControllers";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { handleInputErrors } from "../middleware/validation";
 
 const router = Router();
@@ -64,6 +64,21 @@ router.post('/validate-token',
         .notEmpty().withMessage('El token no puede estar vacío'),
     handleInputErrors,
     AuthController.validateToken,
+);
+
+router.post('/update-password/:token',
+    param('token')
+        .isNumeric().withMessage('Token no vpalido'),
+    body('password')
+        .isLength({ min: 8 }).withMessage('La contraseña debe contar con mínimo 8 caracteres'),
+    body('password_confirmation').custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error('Las contraseñas no coinciden');
+        }
+        return true;
+    }),
+    handleInputErrors,
+    AuthController.updatePasswordWithToken,
 );
 
 export default router;
