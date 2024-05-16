@@ -52,4 +52,11 @@ router.post('/request-code',
     AuthController.requestConfirmationCode,
 );
 
+router.post('/forgot-password',
+    body('email')
+        .notEmpty().withMessage('E-mail no válido'),
+    handleInputErrors,
+    AuthController.forgotPassword,
+);
+
 export default router;
