@@ -11,11 +11,11 @@ export class AuthEmail {
         await transporter.sendMail({
             from: 'Uptask <admin@uptask.com>',
             to: user.email,
-            subject: 'Uptask - Reestablece tu contraseña',
-            text: 'Uptask - Reestablece tu contraseña',
-            html: `<p>Hola: ${user.name} - Has solicitado reestablecer tu contraseña</p>
+            subject: 'Uptask - Confirma tu cuenta',
+            text: 'Uptask - Confirma tu cuenta',
+            html: `<p>Hola: ${user.name} -  Has creado tu cuenta en Uptask. Solo debes confirmar tu cuenta para finalizar</p>
             <p>Visita el siguiente enlace</p>
-            <a href="${process.env.FRONTEND_URL}/auth/new-password">Reestablecer contraseña</a>
+            <a href="${process.env.FRONTEND_URL}/auth/confirm-account">Confirmar cuentaa</a>
             <p>E ingresa el código: <b>${user.token}</b></p>
             <p>Este token expira en 10 minutos</p>
             `
