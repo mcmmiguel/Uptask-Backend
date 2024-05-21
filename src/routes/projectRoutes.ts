@@ -99,6 +99,11 @@ router.post('/:projectId/tasks/:taskId/status',
 );
 
 // Routes for teams
+
+router.get('/:projectId/team',
+    TeamMemberController.getProjectTeam,
+)
+
 router.post('/:projectId/team/find',
     body('email')
         .isEmail().toLowerCase().withMessage('E-mail no válido'),
