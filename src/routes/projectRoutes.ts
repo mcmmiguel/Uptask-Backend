@@ -137,6 +137,10 @@ router.post('/:projectId/tasks/:taskId/notes',
     NoteController.createNote,
 );
 
+router.get('/:projectId/tasks/:taskId/notes',
+    NoteController.getTaskNotes,
+);
+
 
 
 export default router;
