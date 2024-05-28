@@ -97,7 +97,7 @@ router.put('/profile',
     AuthController.updateProfile,
 );
 
-router.post('/update/password',
+router.post('/update-password',
     authenticate,
     body('current_password')
         .notEmpty().withMessage('El password actual no puede estar vacío'),
