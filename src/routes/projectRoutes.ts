@@ -33,8 +33,10 @@ router.get('/:id',
     ProjectController.getProjectById
 );
 
-router.put('/:id',
-    param('id').isMongoId().withMessage('ID no válido'),
+router.param('projectId', projectExists) //Para evitar poner el middleware en cada ruta 
+
+router.put('/:projectId',
+    param('projectId').isMongoId().withMessage('ID no válido'),
     body('projectName')
         .notEmpty().withMessage('El nombre del proyecto es obligatorio'),
     body('clientName')
@@ -42,17 +44,18 @@ router.put('/:id',
     body('description')
         .notEmpty().withMessage('La descripción del proyecto es obligatoria'),
     handleInputErrors,
+    hasAuthorization,
     ProjectController.updateProject
 );
 
-router.delete('/:id',
-    param('id').isMongoId().withMessage('ID no válido'),
+router.delete('/:projectId',
+    param('projectId').isMongoId().withMessage('ID no válido'),
     handleInputErrors,
+    hasAuthorization,
     ProjectController.deleteProject
 );
 
 // ROUTES FOR TASKS
-router.param('projectId', projectExists) //Para evitar poner el middleware en cada ruta 
 router.post('/:projectId/tasks',
     hasAuthorization,
     body('name')
@@ -103,7 +106,6 @@ router.post('/:projectId/tasks/:taskId/status',
 );
 
 // Routes for teams
-
 router.get('/:projectId/team',
     TeamMemberController.getProjectTeam,
 )
