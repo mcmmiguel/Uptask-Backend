@@ -3,7 +3,7 @@ import Note from "./Note";
 
 const taskStatus = {
     PENDING: 'pending',
-    ON_HOLD: 'hold',
+    ON_HOLD: 'onHold',
     IN_PROGRESS: 'inProgress',
     UNDER_REVIEW: 'underReview',
     COMPLETED: 'completed',
